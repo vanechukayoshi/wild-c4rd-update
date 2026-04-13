@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wild C4rd Members</title>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700&display=swap');
+
+body {
+    margin: 0;
+    font-family: 'Orbitron', sans-serif;
+    background: radial-gradient(circle at top, #0d0d0d, #050505 70%);
+    color: #e6e6e6;
+    overflow-x: hidden;
+}
+
+/* Neon Silver Glow Background */
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(circle, rgba(200,200,200,0.08), transparent 70%);
+    animation: bgMove 12s linear infinite;
+    z-index: -1;
+}
+
+@keyframes bgMove {
+    0% { transform: translate(0,0); }
+    50% { transform: translate(-3%, -3%); }
+    100% { transform: translate(0,0); }
+}
+
+header {
+    text-align: center;
+    padding: 30px 10px;
+}
+
+header h1 {
+    font-size: 36px;
+    letter-spacing: 5px;
+    color: #c0c0c0;
+    text-shadow: 0 0 10px #c0c0c0, 0 0 25px #9f9f9f;
+    animation: glowSilver 2s infinite alternate;
+}
+
+@keyframes glowSilver {
+    from { text-shadow: 0 0 10px #bfbfbf; }
+    to { text-shadow: 0 0 25px #ffffff; }
+}
+
+/* Music Button */
+.music-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: rgba(192,192,192,0.08);
+    border: 2px solid #6e6e6e;
+    color: #aaa;
+    padding: 12px 18px;
+    border-radius: 15px;
+    backdrop-filter: blur(10px);
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+/* Neon aktif */
+.music-btn.active {
+    border-color: #ffffff;
+    color: #ffffff;
+    box-shadow: 0 0 15px rgba(255,255,255,0.6),
+                0 0 30px rgba(255,255,255,0.3);
+    background: rgba(255,255,255,0.05);
+}
+
+/* Grid Layout */
+.container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    gap: 25px;
+    padding: 25px;
+}
+
+/* Card Neon Silver */
+.card {
+    background: rgba(20,20,20,0.9);
+    border-radius: 18px;
+    padding: 15px;
+    text-align: center;
+    border: 1px solid rgba(192,192,192,0.5);
+    box-shadow: 0 0 15px rgba(255,255,255,0.15);
+    transition: 0.4s;
+    animation: floatCard 4s ease-in-out infinite;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Floating Animation */
+@keyframes floatCard {
+    0%,100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+
+/* Glow Pulse */
+.card::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    box-shadow: 0 0 25px rgba(255,255,255,0.25);
+    opacity: 0;
+    transition: 0.4s;
+}
+
+.card:hover::after {
+    opacity: 1;
+}
+
+.card:hover {
+    transform: scale(1.05);
+    border-color: #ffffff;
+    box-shadow: 0 0 30px rgba(255,255,255,0.6);
+}
+/* Shimmer Border Effect */
+.card::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    padding: 1px; /* ketebalan garis */
+    background: linear-gradient(
+        120deg,
+        transparent 20%,
+        rgba(255,255,255,0.8) 40%,
+        rgba(255,255,255,1) 50%,
+        rgba(255,255,255,0.8) 60%,
+        transparent 80%
+    );
+    background-size: 200% 200%;
+    animation: borderShine 3s linear infinite;
+    
+    /* biar cuma kelihatan di pinggir */
+    -webkit-mask: 
+        linear-gradient(#000 0 0) content-box, 
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+}
+
+@keyframes borderShine {
+    0% {
+        background-position: -200% 0;
+    }
+    100% {
+        background-position: 200% 0;
+    }
+}
+/* Image 3:4 Ratio */
+.avatar {
+    width: 100%;
+    aspect-ratio: 3/4;
+    object-fit: cover;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    border: 1px solid rgba(255,255,255,0.4);
+}
+
+.rank {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: #bfbfbf;
+}
+
+.name {
+    font-size: 17px;
+    font-weight: bold;
+    color: #ffffff;
+}
+/* =========================
+   SILVER CYBER GLITCH
+========================= */
+
+.avatar.glitch {
+    animation: glitchSilver 0.35s linear;
+}
+
+@keyframes glitchSilver {
+    0% { transform: translate(0); filter: none; }
+    20% { transform: translate(-3px, 2px); filter: brightness(2); }
+    40% { transform: translate(3px, -2px); filter: contrast(2); }
+    60% { transform: translate(-2px, 1px); filter: grayscale(1) brightness(1.8); }
+    80% { transform: translate(2px, -1px); filter: brightness(2.2); }
+    100% { transform: translate(0); filter: none; }
+}
+
+/* Silver Flash Overlay */
+.card.glitching::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    background: linear-gradient(
+        120deg,
+        rgba(255,255,255,0.1),
+        rgba(255,255,255,0.6),
+        rgba(255,255,255,0.1)
+    );
+    opacity: 0;
+    animation: silverFlash 0.35s linear;
+    pointer-events: none;
+}
+
+@keyframes silverFlash {
+    0% { opacity: 0; }
+    50% { opacity: 0.6; }
+    100% { opacity: 0; }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>WILD C4RD</h1>
+    <p style="margin-top:10px; font-size:12px; letter-spacing:2px; color:#aaaaaa;">
+CLICK ON THE CARD TO VIEW THE CHARACTER'S ICONIC CARS
+</p>
+</header>
+
+<div class="container">
+    <div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/s2uUUKW.png"
+         data-alt="https://i.imgur.com/Lt1pdkr.png">
+    <div class="rank">Porsche 911</div>
+    <div class="name">Ginz Kayoshi</div>
+</div>
+    
+    <div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/fX1YRfZ.png"
+         data-alt="https://i.imgur.com/TmZLyy6.png">
+    <div class="rank">Ferrari 512 TR</div>
+    <div class="name">Lopez Vanduka</div>
+</div>
+    
+    <div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/IcztENE.png"
+         data-alt="https://i.imgur.com/uiMMBHQ.png">
+    <div class="rank">Marcedes-AMG GT</div>
+    <div class="name">Lucia Xumena</div>
+</div>
+    
+    <div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/5uJDjwo.png"
+         data-alt="https://i.imgur.com/vWr8Jue.png">
+    <div class="rank">1989 Ferrari F40</div>
+    <div class="name">Caesar Morrison</div>
+</div>
+    
+    <div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/Ddy4U9k.png"
+         data-alt="https://i.imgur.com/5vLsdYV.png">
+    <div class="rank">Audi S2</div>
+    <div class="name">Dante Ferarro</div>
+</div>
+    
+    <div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/4OxcENz.png"
+         data-alt="https://i.imgur.com/q6ejl7E.png">
+    <div class="rank">Porsche 911</div>
+    <div class="name">Nichol Gallagher</div>
+</div>
+    
+    <div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/9DH9JmZ.png"
+         data-alt="https://i.imgur.com/8p5tZy8.png">
+    <div class="rank">Alpine A110S</div>
+    <div class="name">Desmond Bob</div>
+</div>
+    
+    <div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/she2Puc.png"
+         data-alt="https://i.imgur.com/f3DxNeH.png">
+    <div class="rank">Porsche Cayman</div>
+    <div class="name">Takashi Hiroo</div>
+</div>
+    
+    <div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/L42gz6H.png"
+         data-alt="https://i.imgur.com/c7fT1yH.png">
+    <div class="rank">BMW e36</div>
+    <div class="name">Thomas Alvares</div>
+</div>
+    
+    <div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/DhbUeVG.png"
+         data-alt="https://i.imgur.com/rP3mKqv.png">
+    <div class="rank">Ferrari 512 TR</div>
+    <div class="name">Kenn Brooklyn</div>
+</div>
+    
+    <div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/FCZdDz3.png"
+         data-alt="https://i.imgur.com/SJKNVKg.png">
+    <div class="rank">Ferarri 348</div>
+    <div class="name">William Mundo</div>
+</div>
+    
+    <div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/gzKiS4C.png"
+         data-alt="https://i.imgur.com/M8Yx665.png">
+    <div class="rank">Ferrari 512 TR</div>
+    <div class="name">Jermaine Reese</div>
+</div>
+
+<div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/nr7GAOO.png"
+         data-alt="https://i.imgur.com/YfGpVZV.png">
+    <div class="rank">Ferrari 512 TR</div>
+    <div class="name">Tacito Jose</div>
+</div>
+<div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/vyKLTB2.png"
+         data-alt="https://i.imgur.com/1rw6Hko.png">
+    <div class="rank">Ferrari F40</div>
+    <div class="name">Wesker Devlerica</div>
+
+</div>
+<div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/rhqvtt3.png"
+         data-alt="https://i.imgur.com/WZVRZk9.png">
+    <div class="rank">Porsche 911 GT3</div>
+    <div class="name">Kaelithra Velastra</div>
+</div>
+<div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/zTacQS6.png"
+         data-alt="https://i.imgur.com/8EzU8tL.png">
+    <div class="rank">Porsche 911</div>
+    <div class="name">Jaguar Esteban</div>
+</div>
+
+<div class="card">
+    <img class="avatar"
+         src="https://i.imgur.com/RHr6qO7.png"
+         data-alt="https://i.imgur.com/d4Uvbns.png">
+    <div class="rank">Audi S2</div>
+    <div class="name">Charles Jeff</div>
+</div>
+
+<!-- Music Button -->
+<button class="music-btn" id="musicBtn" onclick="toggleMusic()">PLAY🎵</button>
+
+<audio id="bgMusic" loop>
+  <source src="https://j.top4top.io/m_3479pa0uw0.mp3" type="audio/mp3">
+</audio>
+
+<script>
+let music = document.getElementById("bgMusic");
+let btn = document.getElementById("musicBtn");
+let isPlaying = false;
+
+function toggleMusic(){
+    if(!isPlaying){
+        music.play();
+        btn.classList.add("active");
+        btn.innerHTML = "PAUSE🎵";
+        isPlaying = true;
+    } else {
+        music.pause();
+        btn.classList.remove("active");
+        btn.innerHTML = "PLAY🎵";
+        isPlaying = false;
+    }
+}
+</script>
+
+<script>
+document.querySelectorAll('.card').forEach(card => {
+    card.addEventListener('click', () => {
+
+        const img = card.querySelector('.avatar');
+        const mainSrc = img.getAttribute('src');
+        const altSrc = img.getAttribute('data-alt');
+
+        if(!altSrc) return;
+
+        // Tambah glitch class
+        img.classList.add('glitch');
+        card.classList.add('glitching');
+
+        setTimeout(() => {
+
+            // Tukar gambar
+            img.setAttribute('src', altSrc);
+            img.setAttribute('data-alt', mainSrc);
+
+            img.classList.remove('glitch');
+            card.classList.remove('glitching');
+
+        }, 250);
+
+    });
+});
+</script>
+</body>
+</html>
